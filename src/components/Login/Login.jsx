@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 export default function Login() {
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   let [errMsg , setErrMsg] =useState(null)
   let [succesMsg , setSuccesMsg] =useState(null)
@@ -23,7 +24,9 @@ export default function Login() {
       let res = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin" , values)
       // console.log(res);
       setSuccesMsg(res.data.message)
-
+      setTimeout(()=>{
+        navigate('/')
+      },1000)
     }catch(err){
       // console.log(err);
       setErrMsg(err.response.data.message)
