@@ -26,13 +26,13 @@ export default function Home() {
   }
 
   const {data , isLoading} = useQuery({
-    queryKey:'allProducts',
+    queryKey:['allProducts'],
     queryFn:getAllProducts,
     refetchOnWindowFocus:false
   })  
 
   const {data:allCategories} = useQuery({
-    queryKey: "allCategories",
+    queryKey: ["allCategories"],
     queryFn : getAllCategories,
     refetchOnWindowFocus:false
   })
