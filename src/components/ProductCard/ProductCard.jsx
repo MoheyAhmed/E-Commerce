@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { cartContext } from "../Context/CartContextProvider/CartContextProvider";
 
 export default function ProductCard(props) {
+  const {addToCart} = useContext(cartContext)
   let { title, price, imageCover, _id, description, ratingsAverage } =
     props.product;
 
@@ -55,7 +57,7 @@ export default function ProductCard(props) {
             </div>
           </div>
         </Link>
-      <button className="block m-auto mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      <button onClick={()=>{addToCart(_id)}} className="block m-auto mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Add to cart
       </button>
       </div>

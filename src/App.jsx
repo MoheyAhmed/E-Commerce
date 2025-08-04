@@ -14,6 +14,8 @@ import Gaurd from './components/Guard/Gaurd'
 import AuthGaurd from './components/AuthGaurd/AuthGaurd'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ProductDetails from './components/ProductDetails/ProductDetails'
+import CartContextProvider from './components/Context/CartContextProvider/CartContextProvider'
+import { Toaster } from 'react-hot-toast'
 
 const queryClient = new QueryClient()
 
@@ -33,11 +35,14 @@ const routes = createBrowserRouter([
 
 export default function App() {
   return <>
-        <AuthContextProvider>          
+        <AuthContextProvider>   
+          <CartContextProvider>       
           <QueryClientProvider client={queryClient}>
 
           <RouterProvider router={routes}/>
+          <Toaster  />
           </QueryClientProvider>
+          </CartContextProvider>
         </AuthContextProvider>
   </>
 }

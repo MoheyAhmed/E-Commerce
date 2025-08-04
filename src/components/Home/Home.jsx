@@ -11,6 +11,7 @@ import blogImg2 from '../../assets/images/blog-img-2.jpeg'
 export default function Home() {
   // let [allProducts, setAllProducts] = useState([]);
   // let [loading , setLoading] = useState(false)
+  
   async function getAllProducts() {
     // setLoading(true)
     return await axios.get(

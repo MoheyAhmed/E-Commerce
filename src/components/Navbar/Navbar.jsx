@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import Logo from '../../assets/images/freshcart-logo.svg'
 import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext'
+import { cartContext } from '../Context/CartContextProvider/CartContextProvider'
 export default function Navbar() {
 
  const {token , setToken} =  useContext(AuthContext)
+  const {numOfCartItems} =  useContext(cartContext)
  const navigate =  useNavigate()
  function logout(){
   localStorage.removeItem("token")
@@ -37,7 +39,7 @@ export default function Navbar() {
               <NavLink to="" className="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</NavLink>
             </li>
             <li>
-              <NavLink to="cart" className="text-gray-900 dark:text-white hover:underline">Cart</NavLink>
+              <NavLink to="cart" className="text-gray-900 dark:text-white hover:underline">Cart : {numOfCartItems}</NavLink>
             </li>
             <li>
               <NavLink to="products" className="text-gray-900 dark:text-white hover:underline">Products</NavLink>
