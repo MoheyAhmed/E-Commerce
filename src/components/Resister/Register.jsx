@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useFormik } from 'formik'
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
-export default function Register() {
+export default function 
+Register() {
 
     const navigate = useNavigate()
 

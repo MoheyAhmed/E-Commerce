@@ -9,23 +9,35 @@ import Products from './components/Products/Products'
 import Login from './components/Login/Login'
 import Error from './components/Error/Error'
 import Register from './components/Resister/Register'
+import AuthContextProvider from './components/Context/AuthContext'
+import Gaurd from './components/Guard/Gaurd'
+import AuthGaurd from './components/AuthGaurd/AuthGaurd'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import ProductDetails from './components/ProductDetails/ProductDetails'
 
+const queryClient = new QueryClient()
 
 const routes = createBrowserRouter([
   {path : '' , element : <Layout/> , children : [
-    {index : true , element : <Home/>},
-    {path : 'cart' , element : <Cart/>},
-    {path : 'brands' , element : <Brands/>},
-    {path : 'categories' , element : <Categories/>},
-    {path : 'products' , element : <Products/>},
-    {path : 'register' , element : <Register/>},
-    {path : 'login' , element : <Login/>},
+    {index : true , element : <Gaurd><Home/></Gaurd>},
+    {path : 'cart' , element : <Gaurd><Cart/></Gaurd>},
+    {path : 'brands' , element : <Gaurd><Brands/></Gaurd>},
+    {path : 'categories' , element : <Gaurd><Categories/></Gaurd>},
+    {path : 'products' , element : <Gaurd><Products/></Gaurd>},
+    {path : 'details/:id' , element : <Gaurd><ProductDetails/></Gaurd>},
+    {path : 'register' , element : <AuthGaurd><Register/></AuthGaurd>},
+    {path : 'login' , element : <AuthGaurd><Login/></AuthGaurd>},
     {path : '*' , element : <Error/>},
   ]}
 ])
 
 export default function App() {
   return <>
-      <RouterProvider router={routes}/>
+        <AuthContextProvider>          
+          <QueryClientProvider client={queryClient}>
+
+          <RouterProvider router={routes}/>
+          </QueryClientProvider>
+        </AuthContextProvider>
   </>
 }

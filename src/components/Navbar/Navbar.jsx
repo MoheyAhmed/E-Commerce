@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '../../assets/images/freshcart-logo.svg'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../Context/AuthContext'
 export default function Navbar() {
+
+ const {token , setToken} =  useContext(AuthContext)
+ const navigate =  useNavigate()
+ function logout(){
+  localStorage.removeItem("token")
+  setToken(null)
+  navigate("/")
+ }
   return <>
 
     <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900">
@@ -11,13 +20,16 @@ export default function Navbar() {
           {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
         </NavLink>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
-          <NavLink to="register" className="text-sm  text-gray-500 dark:text-white hover:underline">Register</NavLink>
+          {token ? <button onClick={logout}>Log Out</button> : <>
+            <NavLink to="register" className="text-sm  text-gray-500 dark:text-white hover:underline">Register</NavLink>
           <NavLink to="login" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</NavLink>
-          <button>Log Out</button>
+          </>}
+          
+          
         </div>
       </div>
     </nav>
-    <nav className="bg-gray-100 dark:bg-gray-700">
+    {token ? <nav className="bg-gray-100 dark:bg-gray-700">
       <div className="max-w-screen-xl px-4 py-3 mx-auto">
         <div className="flex items-center justify-center">
           <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
@@ -39,7 +51,7 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> : null}
 
   </>
 }
